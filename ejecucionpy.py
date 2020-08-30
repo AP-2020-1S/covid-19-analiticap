@@ -1,26 +1,5 @@
 print("Estoy ejecutando")
 
-import pandas as pd 
-
-data = [[45939, 21574, 2876, 1815, 1646,   89,  555],
-        [60423, 29990, 4708, 2568, 2366, 1411,  733],
-        [64721, 32510, 5230, 2695, 2526, 1546,  773],
-        [68484, 35218, 6662, 2845, 2691, 1663,  836],
-        [71799, 37598, 6856, 3000, 2868, 1769,  911],
-        [76036, 40341, 8220, 3145, 3054, 1905, 1008],
-        [79831, 43173, 9053, 3338, 3224, 2005, 1076]]
-
-
-
-data = pd.DataFrame(
-    data = data,
-    index = [2, 2, 2, 2, 2, 2, 2],
-    columns = ['1', '2', '3', '4', '5', '6', '7']
-)
-
-for col in data.columns:
-    fig = data.plot.bar(y=col).get_figure().savefig('./images/' + col + '.png')
-"""
 import requests
 from pandas.io.json import json_normalize
 import pandas as pd
@@ -108,7 +87,6 @@ plt.plot(FM1Nuevos['casos_nuevos_reportados'])
 plt.plot(FM1Nuevos['casos_nuevos_reportados_test'])
 plt.legend(['casos_nuevos_reportados','casos_nuevos_reportados_test'])
 plt.savefig('images/8.png')
-"""
 
 print("terminé")
 
