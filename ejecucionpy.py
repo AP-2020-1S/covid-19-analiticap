@@ -14,12 +14,12 @@ data = [[45939, 21574, 2876, 1815, 1646,   89,  555],
 
 data = pd.DataFrame(
     data = data,
-    index = [1111, 1956, 2020, 1958, 1959, 202000, 202000],
-    columns = ['1', '2', '3', 'S.Amer', 'Oceania', 'Africa', 'Mid.Amer']
+    index = [1010, 1010, 1010, 1958, 1959, 202000, 202000],
+    columns = ['1', '2', '3', '4', '5', '6', '7']
 )
 
 for col in data.columns:
-    fig = data.plot.bar(y=col).get_figure().savefig('images/' + col + '.png')
+    fig = data.plot.bar(y=col).get_figure().savefig('./images/' + col + '.png')
 """
 import requests
 from pandas.io.json import json_normalize
