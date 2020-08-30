@@ -6,6 +6,6 @@ python3 ejecucionpy.py
 git status
 git config user.email "you@example.com"
 git config user.name "Your Name"
-git add covid-19-analiticap/images/*
+git add -u
 git commit -m "Prueba"
 git push origin
