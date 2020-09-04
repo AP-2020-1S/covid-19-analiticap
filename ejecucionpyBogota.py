@@ -12,7 +12,7 @@ Datos.rename(columns={'id_de_caso':'id_caso','fecha_de_notificaci_n':'fecha_noti
                       'tipo_recuperaci_n':'tipo_recuperacion','fecha_de_muerte':'fecha_muerte'},inplace=True)
 
 # filtrando ciudades
-Datos1=Datos[Datos['ciudad'].isin(['Medellín'])]
+Datos1=Datos[Datos['ciudad'].isin(['Bogotá D.C.'])]
 Datos1.reset_index(inplace=True,drop=True)
 
 print("Leí datos")
@@ -41,8 +41,9 @@ temp=M2Nuevos[-7:].values.reshape(-1,1)
 sc=MinMaxScaler(feature_range=(0, 1))
 temp=sc.fit_transform(temp)
 
-from tensorflow.keras.models import load_model
-model = load_model('./modelos/ModMedellinNuevos.h5')
+import keras
+from keras.models import load_model
+model = load_model('./modelos/ModBogotaNuevos.h5')
 
 a=([[[float(temp[i])] for i in range(0,len(temp))]])
 
@@ -53,27 +54,27 @@ for i in range(1,15):
   a[0].pop(0)
   a[0].append([float(pred)])
 
-MedellinNuevos=sc.inverse_transform(b)
+BogotaNuevos=sc.inverse_transform(b)
 
 import datetime
 index=[M2Nuevos.index[-1]+datetime.timedelta(days=i) for i in range(1,15)]
-MedellinNuevos=pd.DataFrame(data=MedellinNuevos, index=index, columns=['prediccion_casos_nuevos_reportados'])
+BogotaNuevos=pd.DataFrame(data=BogotaNuevos, index=index, columns=['prediccion_casos_nuevos_reportados'])
 
 from pandas.plotting import table 
 ax = plt.subplot(111, frame_on=False)
 ax.xaxis.set_visible(False)  
 ax.yaxis.set_visible(False)  
-table(ax, MedellinNuevos) 
-plt.savefig('./images/3.png')
+table(ax, BogotaNuevos) 
+plt.savefig('./images/15.png')
 
-M2Nuevos.plot().figure.savefig('./images/1.png')
+M2Nuevos.plot().figure.savefig('./images/13.png')
 
-MedellinNuevos.plot().figure.savefig('./images/2.png')
+BogotaNuevos.plot().figure.savefig('./images/14.png')
 
-total=pd.concat((M2Nuevos,MedellinNuevos),axis = 0)
+total=pd.concat((M2Nuevos,BogotaNuevos),axis = 0)
 total.plot()
 plt.axvline(x=M2Nuevos.index[-1],color='y',linestyle='--')
-plt.savefig('./images/4.png')
+plt.savefig('./images/16.png')
 
 
 print("Terminé nuevos")
@@ -100,7 +101,7 @@ temp=M2Muerte[-7:].values.reshape(-1,1)
 sc=MinMaxScaler(feature_range=(0, 1))
 temp=sc.fit_transform(temp)
 
-model = load_model('./modelos/ModMedellinMuerte.h5')
+model = load_model('./modelos/ModBogotaMuerte.h5')
 
 a=([[[float(temp[i])] for i in range(0,len(temp))]])
 
@@ -111,27 +112,27 @@ for i in range(1,15):
   a[0].pop(0)
   a[0].append([float(pred)])
 
-MedellinMuerte=sc.inverse_transform(b)
+BogotaMuerte=sc.inverse_transform(b)
 
 import datetime
 index=[M2Muerte.index[-1]+datetime.timedelta(days=i) for i in range(1,15)]
-MedellinMuerte=pd.DataFrame(data=MedellinMuerte, index=index, columns=['prediccion_casos_muerte'])
+BogotaMuerte=pd.DataFrame(data=BogotaMuerte, index=index, columns=['prediccion_casos_muerte'])
 
 from pandas.plotting import table 
 ax = plt.subplot(111, frame_on=False)
 ax.xaxis.set_visible(False)  
 ax.yaxis.set_visible(False)  
-table(ax, MedellinMuerte) 
-plt.savefig('images/7.png')
+table(ax, BogotaMuerte) 
+plt.savefig('images/19.png')
 
-M2Muerte.plot().figure.savefig('images/5.png')
+M2Muerte.plot().figure.savefig('images/17.png')
 
-MedellinMuerte.plot().figure.savefig('images/6.png')
+BogotaMuerte.plot().figure.savefig('images/18.png')
 
-total=pd.concat((M2Muerte,MedellinMuerte),axis = 0)
+total=pd.concat((M2Muerte,BogotaMuerte),axis = 0)
 total.plot()
 plt.axvline(x=M2Muerte.index[-1],color='y',linestyle='--')
-plt.savefig('images/8.png')
+plt.savefig('images/20.png')
 
 print("Terminé fallecidos")
 
@@ -157,7 +158,7 @@ temp=M2Recuperado[-7:].values.reshape(-1,1)
 sc=MinMaxScaler(feature_range=(0, 1))
 temp=sc.fit_transform(temp)
 
-model = load_model('./modelos/ModMedellinRecuperado.h5')
+model = load_model('./modelos/ModBogotaRecuperado.h5')
 
 a=([[[float(temp[i])] for i in range(0,len(temp))]])
 
@@ -168,26 +169,26 @@ for i in range(1,15):
   a[0].pop(0)
   a[0].append([float(pred)])
 
-MedellinRecuperado=sc.inverse_transform(b)
+BogotaRecuperado=sc.inverse_transform(b)
 
 import datetime
 index=[M2Recuperado.index[-1]+datetime.timedelta(days=i) for i in range(1,15)]
-MedellinRecuperado=pd.DataFrame(data=MedellinRecuperado, index=index, columns=['prediccion_casos_recuperado'])
+BogotaRecuperado=pd.DataFrame(data=BogotaRecuperado, index=index, columns=['prediccion_casos_recuperado'])
 
 from pandas.plotting import table 
 ax = plt.subplot(111, frame_on=False)
 ax.xaxis.set_visible(False)  
 ax.yaxis.set_visible(False)  
-table(ax, MedellinRecuperado) 
-plt.savefig('images/11.png')
+table(ax, BogotaRecuperado) 
+plt.savefig('images/23.png')
 
-M2Recuperado.plot().figure.savefig('images/9.png')
+M2Recuperado.plot().figure.savefig('images/21.png')
 
-MedellinRecuperado.plot().figure.savefig('images/10.png')
+BogotaRecuperado.plot().figure.savefig('images/22.png')
 
-total=pd.concat((M2Recuperado,MedellinRecuperado),axis = 0)
+total=pd.concat((M2Recuperado,BogotaRecuperado),axis = 0)
 total.plot()
 plt.axvline(x=M2Recuperado.index[-1],color='y',linestyle='--')
-plt.savefig('images/12.png')
+plt.savefig('images/24.png')
 
 print("Terminé recuperados")
